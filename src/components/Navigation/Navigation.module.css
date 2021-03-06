@@ -1,0 +1,14 @@
+.nav {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.8rem;
+  width: 12.5rem;
+  border-radius: 0.625rem;
+  background-color: #3d348b;
+  height: calc(100% - 1rem);
+}
+
+.categories {
+  max-width: 80%;
+  margin: 0 auto;
+}

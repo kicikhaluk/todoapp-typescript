@@ -1,0 +1,24 @@
+.profile {
+  display: flex;
+  align-items: center;
+  max-width: 80%;
+  margin: 2rem auto;
+  cursor: pointer;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-color);
+  color: var(--accent-color);
+  border-radius: 50%;
+  font-size: 0.8rem;
+  padding: 0.4rem;
+  margin-right: 10%;
+}
+
+.user {
+  font-size: 1rem;
+  color: var(--light-color);
+}
