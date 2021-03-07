@@ -1,4 +1,5 @@
 import React from "react";
+import Todo from "../Todo/Todo";
 import Button from "../UI/Button/Button";
 import styles from "./Form.module.css";
 const Form = () => {
@@ -14,32 +15,7 @@ const Form = () => {
         <input type="text" placeholder="To Do" />
         <Button>Add</Button>
       </div>
-      <ul>
-        <li>
-          <label>
-            <input type="checkbox" name="" id="" />
-            <input type="text" name="" id="" value="todo1" />
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="" id="" />
-            <input type="text" name="" id="" value="todo1" />
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="" id="" />
-            <input type="text" name="" id="" value="todo1" />
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" name="" id="" />
-            <input type="text" name="" id="" value="todo1" />
-          </label>
-        </li>
-      </ul>
+      <Todo />
       <div>
         <Button>Save</Button>
       </div>
