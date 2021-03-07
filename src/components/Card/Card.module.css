@@ -1,6 +1,33 @@
 .card {
+  position: relative;
   padding: 1rem;
   background-color: var(--light-color);
   box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.6);
   border-radius: 0.625rem;
+  min-height: 3rem;
+  height: 16rem;
+  overflow: hidden;
+  user-select: none;
+}
+
+.default {
+  display: flex;
+  flex-direction: column;
+}
+.overlay {
+  display: none;
+}
+
+.card:hover .overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  cursor: pointer;
 }

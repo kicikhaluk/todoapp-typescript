@@ -1,0 +1,10 @@
+.form input[type="text"] {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  padding: 0.6rem 0;
+}
+
+.form input:focus {
+  outline: 0;
+}
