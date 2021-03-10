@@ -9,17 +9,21 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   clickHandler?: ((event: MouseEvent<HTMLButtonElement>) => void) | undefined;
   props?: any;
   full?: boolean;
+  size?: "sm" | "m" | "l" | "xl";
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
   children,
   clickHandler,
   full,
+  size,
   ...props
 }) => {
   return (
     <button
-      className={`${styles.btn} ${full ? styles.btnFull : ""}`}
+      className={`${styles.btn} ${size ? styles["btn-" + size] : ""} ${
+        full ? styles.btnFull : ""
+      }`}
       onClick={clickHandler}
       {...props}
     >

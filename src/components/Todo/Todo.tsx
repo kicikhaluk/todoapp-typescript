@@ -1,27 +1,22 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
+import { TodoItem as TodoItemType } from "../../types";
 import TodoItem from "./TodoItem/TodoItem";
 
-const Todo = () => {
+interface TodoProps {
+  todoList: TodoItemType[];
+}
+
+const Todo: FunctionComponent<TodoProps> = ({ todoList }) => {
   return (
     <ul>
-      <TodoItem
-        todo={{ id: "1", task: "Groceries", status: "done" }}
-        changeHandler={() => {}}
-        deleteHandler={() => {}}
-        onBlurHandler={() => {}}
-      />
-      <TodoItem
-        todo={{ id: "2", task: "CS50", status: "todo" }}
-        changeHandler={() => {}}
-        deleteHandler={() => {}}
-        onBlurHandler={() => {}}
-      />
-      <TodoItem
-        todo={{ id: "3", task: "Orbvpn", status: "todo" }}
-        changeHandler={() => {}}
-        deleteHandler={() => {}}
-        onBlurHandler={() => {}}
-      />
+      {todoList.map((todo) => (
+        <TodoItem
+          todo={todo}
+          changeHandler={() => {}}
+          deleteHandler={() => {}}
+          onBlurHandler={() => {}}
+        />
+      ))}
     </ul>
   );
 };

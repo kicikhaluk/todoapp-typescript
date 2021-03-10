@@ -9,6 +9,12 @@
   border-radius: 0.625rem;
 }
 
+.btn-sm {
+  padding: 0.6rem;
+  background-color: transparent;
+  color: var(--accent-color);
+}
+
 .btnFull {
   display: block;
   width: 100%;

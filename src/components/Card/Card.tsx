@@ -12,12 +12,12 @@ const Card: FunctionComponent<CardProps> = ({ children, type = "overlay" }) => {
       className={`${styles.card} ${type === "default" ? styles.default : ""}`}
     >
       {children}
-      {type === "overlay" ? (
+      {/* {type === "overlay" ? (
         <div className={styles.overlay}>
           <Button>Edit</Button>
           <Button>Delete</Button>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

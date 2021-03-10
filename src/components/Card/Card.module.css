@@ -6,7 +6,8 @@
   border-radius: 0.625rem;
   min-height: 3rem;
   height: 16rem;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   user-select: none;
 }
 
