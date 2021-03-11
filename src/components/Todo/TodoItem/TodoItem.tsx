@@ -1,39 +1,56 @@
-import React, { FunctionComponent } from "react";
+import { ChangeEvent, FunctionComponent, useState } from "react";
 import styles from "./TodoItem.module.css";
+import { useTodoContext } from "../../context/TodoContext";
+import { TodoItem as TodoItemTypes } from "../../../types";
 
 export interface TodoItemProps {
-  todo: {
-    id: string;
-    task: string;
-    status: "done" | "todo";
-  };
-  deleteHandler: () => void;
-  changeHandler: () => void;
-  onBlurHandler: () => void;
+  todo: TodoItemTypes;
 }
+const TodoItem: FunctionComponent<TodoItemProps> = ({ todo }) => {
+  const { dispatch } = useTodoContext();
+  const [updateTask, setUpdateTask] = useState(todo.task);
 
-const TodoItem: FunctionComponent<TodoItemProps> = ({
-  todo: { id, task, status },
-  deleteHandler,
-  changeHandler,
-  onBlurHandler,
-}) => {
+  const updateDispatch = () => {
+    const updatedTodo = {
+      ...todo,
+      task: updateTask,
+    };
+    dispatch({ type: "updateTodoItem", payload: { todo: updatedTodo } });
+  };
+
+  const changeStatus = () => {
+    dispatch({
+      type: "updateTodoItem",
+      payload: {
+        todo: {
+          ...todo,
+          isDone: !todo.isDone,
+        },
+      },
+    });
+  };
+
+  const onTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setUpdateTask(e.target.value);
+  };
+
   return (
     <li className={styles.todo}>
+      <input type="checkbox" checked={todo.isDone} onChange={changeStatus} />
       <input
-        type="checkbox"
-        checked={status === "done" ? true : false}
-        onChange={changeHandler}
-      />
-      <input
-        className={`${styles.input} ${status === "done" ? styles.done : ""}`}
+        className={`${styles.input} ${todo.isDone ? styles.done : ""}`}
         type="text"
-        disabled={status === "done"}
-        value={task}
-        onChange={changeHandler}
-        onBlur={onBlurHandler}
+        disabled={todo.isDone}
+        value={updateTask}
+        onChange={onTaskChange}
+        onBlur={updateDispatch}
       />
-      <button className={styles.deleteBtn} onClick={deleteHandler}>
+      <button
+        className={styles.deleteBtn}
+        onClick={() =>
+          dispatch({ type: "deleteTodoItem", payload: { todoId: todo.id } })
+        }
+      >
         Delete
       </button>
     </li>

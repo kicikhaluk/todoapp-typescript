@@ -1,35 +1,58 @@
-import React, { ChangeEvent, MouseEvent, useState } from "react";
-import Todo from "../Todo/Todo";
+import { ChangeEvent, FunctionComponent, MouseEvent, useState } from "react";
+import { useTodoContext } from "../context/TodoContext";
 import Button from "../UI/Button/Button";
 import styles from "./Form.module.css";
-import { TodoItem } from "../../types/index";
 
-const Form = () => {
-  const [todos, setTodos] = useState<TodoItem[]>([]);
-  const [newTodo, setNewTodo] = useState<string>("");
+interface FormProps {
+  isSaved: boolean;
+}
+
+const Form: FunctionComponent<FormProps> = ({ isSaved }) => {
+  const { state, dispatch } = useTodoContext();
+  const [cardTitle, setCardTitle] = useState<string>(state.todo.title);
+  const [category, setCategory] = useState<string>(state.todo.category);
+  const [newTodo, setNewTodo] = useState("");
+
+  const cardTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setCardTitle(e.target.value);
+  };
+
+  const categoryHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.target.value);
+  };
 
   const newTodoHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTodo(e.target.value);
   };
 
   const addTodoHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    const newTodoItem: TodoItem = {
-      id: new Date().toISOString(),
-      task: newTodo,
-      status: "todo",
-    };
-    setTodos([...todos, newTodoItem]);
+    dispatch({ type: "addTodoItem", payload: { task: newTodo } });
     setNewTodo("");
   };
 
   return (
-    <form className={styles.form}>
+    <div className={styles.form}>
       <div className={styles.formElement}>
-        <input type="text" name="" id="" placeholder="New Project" />
+        <input
+          type="text"
+          placeholder="New Project"
+          value={cardTitle}
+          onChange={cardTitleHandler}
+          onBlur={() =>
+            dispatch({ type: "addTitle", payload: { title: cardTitle } })
+          }
+        />
       </div>
       <div className={styles.formElement}>
-        <input type="text" placeholder="Category" />
+        <input
+          type="text"
+          placeholder="Category"
+          value={category}
+          onChange={categoryHandler}
+          onBlur={() => {
+            dispatch({ type: "addCategory", payload: { category } });
+          }}
+        />
       </div>
       <div className={`${styles.formElement} ${styles.todoInputField}`}>
         <input
@@ -38,15 +61,14 @@ const Form = () => {
           value={newTodo}
           onChange={newTodoHandler}
         />
-        <Button onClick={addTodoHandler} size="sm">
-          Add
-        </Button>
+
+        {!isSaved ? (
+          <Button onClick={addTodoHandler} size="sm">
+            Add
+          </Button>
+        ) : null}
       </div>
-      <Todo todoList={todos} />
-      <div className={styles.formElement}>
-        <Button full>Save</Button>
-      </div>
-    </form>
+    </div>
   );
 };
 

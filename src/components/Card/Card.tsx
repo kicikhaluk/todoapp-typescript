@@ -1,23 +1,14 @@
-import React, { FunctionComponent } from "react";
-import Button from "../UI/Button/Button";
+import { FunctionComponent } from "react";
 import styles from "./Card.module.css";
 
 interface CardProps {
-  type?: "default" | "overlay";
+  type?: "flex" | "default";
 }
 
-const Card: FunctionComponent<CardProps> = ({ children, type = "overlay" }) => {
+const Card: FunctionComponent<CardProps> = ({ children, type = "default" }) => {
   return (
-    <div
-      className={`${styles.card} ${type === "default" ? styles.default : ""}`}
-    >
+    <div className={`${styles.card} ${type === "flex" ? styles.flex : ""}`}>
       {children}
-      {/* {type === "overlay" ? (
-        <div className={styles.overlay}>
-          <Button>Edit</Button>
-          <Button>Delete</Button>
-        </div>
-      ) : null} */}
     </div>
   );
 };
