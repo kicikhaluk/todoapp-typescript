@@ -1,13 +1,22 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import styles from "./NavigationItem.module.css";
-const NavigationItem = () => {
+
+interface NavItemProps {
+  category: string;
+}
+
+const NavigationItem: FunctionComponent<NavItemProps> = ({ category }) => {
   return (
-    <li>
-      <label className={styles.category}>
-        <input type="checkbox" name="" id="" />
-        Category
-      </label>
-    </li>
+    <>
+      {category === "" ? null : (
+        <li>
+          <label className={styles.category}>
+            <input type="checkbox" />
+            {category}
+          </label>
+        </li>
+      )}
+    </>
   );
 };
 

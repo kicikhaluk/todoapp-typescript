@@ -1,14 +1,17 @@
 import { ChangeEvent, FunctionComponent, MouseEvent, useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
+import { useTodoCardContext } from "../context/TodoCardContext";
 import Button from "../UI/Button/Button";
 import styles from "./Form.module.css";
 
 interface FormProps {
   isSaved: boolean;
+  cardId: string;
 }
 
-const Form: FunctionComponent<FormProps> = ({ isSaved }) => {
+const Form: FunctionComponent<FormProps> = ({ isSaved, cardId }) => {
   const { state, dispatch } = useTodoContext();
+  const { updateCardCategory } = useTodoCardContext();
   const [cardTitle, setCardTitle] = useState<string>(state.todo.title);
   const [category, setCategory] = useState<string>(state.todo.category);
   const [newTodo, setNewTodo] = useState("");
@@ -51,6 +54,7 @@ const Form: FunctionComponent<FormProps> = ({ isSaved }) => {
           onChange={categoryHandler}
           onBlur={() => {
             dispatch({ type: "addCategory", payload: { category } });
+            updateCardCategory(cardId, category);
           }}
         />
       </div>
