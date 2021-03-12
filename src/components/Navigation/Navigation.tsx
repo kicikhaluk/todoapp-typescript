@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import UserProfile from "./UserProfile/UserProfile";
-import { useTodoCardContext } from "../context/TodoCardContext";
+import { useTodoContext } from "../context/TodoContext";
 
 const Navigation = () => {
-  const { cards } = useTodoCardContext();
+  const {
+    state: { todoCards },
+  } = useTodoContext();
   const history = useHistory();
   const [queries, setQueries] = useState<string[]>([]);
 
@@ -36,8 +38,8 @@ const Navigation = () => {
     <nav className={styles.nav}>
       <UserProfile />
       <ul className={styles.categories}>
-        {cards.length > 0
-          ? cards
+        {todoCards.length > 0
+          ? todoCards
               .map((card) => card.category)
               .filter(
                 (category, index, array) => array.indexOf(category) === index

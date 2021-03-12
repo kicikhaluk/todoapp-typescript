@@ -1,19 +1,18 @@
 import { ChangeEvent, FunctionComponent, MouseEvent, useState } from "react";
+import { Todo } from "../../types";
 import { useTodoContext } from "../context/TodoContext";
-import { useTodoCardContext } from "../context/TodoCardContext";
 import Button from "../UI/Button/Button";
 import styles from "./Form.module.css";
 
 interface FormProps {
   isSaved: boolean;
-  cardId: string;
+  todoCard: Todo;
 }
 
-const Form: FunctionComponent<FormProps> = ({ isSaved, cardId }) => {
-  const { state, dispatch } = useTodoContext();
-  const { updateCardCategory } = useTodoCardContext();
-  const [cardTitle, setCardTitle] = useState<string>(state.todo.title);
-  const [category, setCategory] = useState<string>(state.todo.category);
+const Form: FunctionComponent<FormProps> = ({ isSaved, todoCard }) => {
+  const { dispatch } = useTodoContext();
+  const [cardTitle, setCardTitle] = useState<string>(todoCard.title);
+  const [category, setCategory] = useState<string>(todoCard.category);
   const [newTodo, setNewTodo] = useState("");
 
   const cardTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,7 +28,10 @@ const Form: FunctionComponent<FormProps> = ({ isSaved, cardId }) => {
   };
 
   const addTodoHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    dispatch({ type: "addTodoItem", payload: { task: newTodo } });
+    dispatch({
+      type: "addTodoItem",
+      payload: { task: newTodo, todoCardId: todoCard.id },
+    });
     setNewTodo("");
   };
 
@@ -42,7 +44,10 @@ const Form: FunctionComponent<FormProps> = ({ isSaved, cardId }) => {
           value={cardTitle}
           onChange={cardTitleHandler}
           onBlur={() =>
-            dispatch({ type: "addTitle", payload: { title: cardTitle } })
+            dispatch({
+              type: "addTitle",
+              payload: { title: cardTitle, todoCardId: todoCard.id },
+            })
           }
         />
       </div>
@@ -53,8 +58,10 @@ const Form: FunctionComponent<FormProps> = ({ isSaved, cardId }) => {
           value={category}
           onChange={categoryHandler}
           onBlur={() => {
-            dispatch({ type: "addCategory", payload: { category } });
-            updateCardCategory(cardId, category);
+            dispatch({
+              type: "addCategory",
+              payload: { category, todoCardId: todoCard.id },
+            });
           }}
         />
       </div>

@@ -5,8 +5,9 @@ import { TodoItem as TodoItemTypes } from "../../../types";
 
 export interface TodoItemProps {
   todo: TodoItemTypes;
+  todoCardId: string;
 }
-const TodoItem: FunctionComponent<TodoItemProps> = ({ todo }) => {
+const TodoItem: FunctionComponent<TodoItemProps> = ({ todo, todoCardId }) => {
   const { dispatch } = useTodoContext();
   const [updateTask, setUpdateTask] = useState(todo.task);
 
@@ -15,7 +16,10 @@ const TodoItem: FunctionComponent<TodoItemProps> = ({ todo }) => {
       ...todo,
       task: updateTask,
     };
-    dispatch({ type: "updateTodoItem", payload: { todo: updatedTodo } });
+    dispatch({
+      type: "updateTodoItem",
+      payload: { todo: updatedTodo, todoCardId },
+    });
   };
 
   const changeStatus = () => {
@@ -26,6 +30,7 @@ const TodoItem: FunctionComponent<TodoItemProps> = ({ todo }) => {
           ...todo,
           isDone: !todo.isDone,
         },
+        todoCardId,
       },
     });
   };
@@ -48,7 +53,10 @@ const TodoItem: FunctionComponent<TodoItemProps> = ({ todo }) => {
       <button
         className={styles.deleteBtn}
         onClick={() =>
-          dispatch({ type: "deleteTodoItem", payload: { todoId: todo.id } })
+          dispatch({
+            type: "deleteTodoItem",
+            payload: { todoId: todo.id, todoCardId },
+          })
         }
       >
         Delete

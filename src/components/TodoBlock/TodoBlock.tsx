@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
+import { Todo } from "../../types";
 import Card from "../Card/Card";
-import { TodoContextProvider } from "../context/TodoContext";
-import { useTodoCardContext } from "../context/TodoCardContext";
+import { useTodoContext } from "../context/TodoContext";
 import Form from "../Form/Form";
 import TodoList from "../Todo/TodoList";
 import Button from "../UI/Button/Button";
@@ -9,11 +9,11 @@ import Button from "../UI/Button/Button";
 import styles from "./TodoBlock.module.css";
 
 interface TodoBlockProps {
-  cardId: string;
+  todoCard: Todo;
 }
 
-const TodoBlock: FunctionComponent<TodoBlockProps> = ({ cardId }) => {
-  const { deleteCard } = useTodoCardContext();
+const TodoBlock: FunctionComponent<TodoBlockProps> = ({ todoCard }) => {
+  const { dispatch } = useTodoContext();
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   const onSaveHandler = () => {
@@ -21,24 +21,31 @@ const TodoBlock: FunctionComponent<TodoBlockProps> = ({ cardId }) => {
   };
 
   return (
-    <TodoContextProvider>
-      <div className={styles.card}>
-        <Card>
-          <Form isSaved={isSaved} cardId={cardId} />
-          <TodoList />
-          {isSaved ? (
-            <div className={styles.overlay}>
-              <Button clickHandler={onSaveHandler}>Edit</Button>
-              <Button clickHandler={() => deleteCard(cardId)}>Delete</Button>
-            </div>
-          ) : (
-            <Button full clickHandler={onSaveHandler}>
-              Save
+    <div className={styles.card}>
+      <Card>
+        <Form isSaved={isSaved} todoCard={todoCard} />
+        <TodoList todos={todoCard.todos} todoCardId={todoCard.id} />
+        {isSaved ? (
+          <div className={styles.overlay}>
+            <Button clickHandler={onSaveHandler}>Edit</Button>
+            <Button
+              clickHandler={() =>
+                dispatch({
+                  type: "deleteTodoCard",
+                  payload: { todoCardId: todoCard.id },
+                })
+              }
+            >
+              Delete
             </Button>
-          )}
-        </Card>
-      </div>
-    </TodoContextProvider>
+          </div>
+        ) : (
+          <Button full clickHandler={onSaveHandler}>
+            Save
+          </Button>
+        )}
+      </Card>
+    </div>
   );
 };
 

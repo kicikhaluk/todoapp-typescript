@@ -1,18 +1,18 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { TodoCardContextProvider } from "./components/context/TodoCardContext";
+import { TodoContextProvider } from "./components/context/TodoContext";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./screens/HomePage";
 
 function App() {
   return (
     <Router>
-      <TodoCardContextProvider>
+      <TodoContextProvider>
         <Layout>
           <Switch>
             <Route component={HomePage} path="/" />
           </Switch>
         </Layout>
-      </TodoCardContextProvider>
+      </TodoContextProvider>
     </Router>
   );
 }

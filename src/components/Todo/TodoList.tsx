@@ -1,11 +1,17 @@
+import { FunctionComponent } from "react";
+import { TodoItem as TodoItemType } from "../../types";
 import TodoItem from "./TodoItem/TodoItem";
-import { useTodoContext } from "../context/TodoContext";
-const TodoList = () => {
-  const { state } = useTodoContext();
+
+interface TodoListProps {
+  todos: TodoItemType[];
+  todoCardId: string;
+}
+
+const TodoList: FunctionComponent<TodoListProps> = ({ todos, todoCardId }) => {
   return (
     <ul>
-      {state.todo.todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
+      {todos.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} todoCardId={todoCardId} />
       ))}
     </ul>
   );

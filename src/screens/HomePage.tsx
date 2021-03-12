@@ -4,28 +4,31 @@ import TodoBlock from "../components/TodoBlock/TodoBlock";
 import Button from "../components/UI/Button/Button";
 import Column from "../components/UI/Column/Column";
 import Row from "../components/UI/Row/Row";
-import { useTodoCardContext } from "../components/context/TodoCardContext";
+import { useTodoContext } from "../components/context/TodoContext";
 const HomePage = () => {
-  const { createNewCard, cards } = useTodoCardContext();
+  const {
+    state: { todoCards },
+    dispatch,
+  } = useTodoContext();
   const queries = new URLSearchParams(useLocation().search).getAll("category");
 
   return (
     <Row>
-      {cards.length > 0
+      {todoCards.length > 0
         ? queries.length > 0
-          ? cards.map((card) => {
+          ? todoCards.map((card) => {
               if (queries.includes(card.category)) {
                 return (
                   <Column key={card.id}>
-                    <TodoBlock cardId={card.id} />
+                    <TodoBlock todoCard={card} />
                   </Column>
                 );
               }
               return null;
             })
-          : cards.map((card) => (
+          : todoCards.map((card) => (
               <Column key={card.id}>
-                <TodoBlock cardId={card.id} />
+                <TodoBlock todoCard={card} />
               </Column>
             ))
         : null}
@@ -34,7 +37,7 @@ const HomePage = () => {
           <h3>New Project</h3>
           <Button
             full
-            clickHandler={createNewCard}
+            clickHandler={() => dispatch({ type: "createTodoCard" })}
             style={{ marginTop: "auto" }}
           >
             Create
