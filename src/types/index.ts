@@ -11,9 +11,6 @@ export type Todo = {
   todos: TodoItem[];
 };
 
-export type cardObject = {
-  id: string;
-};
 export type TodoCard = {
   id: string;
   category: string;
