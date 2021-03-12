@@ -4,11 +4,14 @@ import styles from "./Navigation.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import UserProfile from "./UserProfile/UserProfile";
 import { useTodoContext } from "../../contexts/TodoContext";
+import { useAuth } from "../../contexts/AuthContext";
+import Button from "../UI/Button/Button";
 
 const Navigation = () => {
   const {
     state: { todoCards },
   } = useTodoContext();
+  const { logout, name } = useAuth();
   const history = useHistory();
   const [queries, setQueries] = useState<string[]>([]);
 
@@ -36,7 +39,12 @@ const Navigation = () => {
 
   return (
     <nav className={styles.nav}>
-      <UserProfile />
+      <UserProfile name={name} />
+      <div className={styles.logoutBtn}>
+        <Button full variant="light" clickHandler={logout}>
+          Logout
+        </Button>
+      </div>
       <ul className={styles.categories}>
         {todoCards.length > 0
           ? todoCards

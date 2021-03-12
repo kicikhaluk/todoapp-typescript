@@ -10,6 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   props?: any;
   full?: boolean;
   size?: "sm" | "m" | "l" | "xl";
+  variant: "primary" | "secondary" | "light";
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -17,13 +18,14 @@ const Button: FunctionComponent<ButtonProps> = ({
   clickHandler,
   full,
   size,
+  variant = "secondary",
   ...props
 }) => {
   return (
     <button
-      className={`${styles.btn} ${size ? styles["btn-" + size] : ""} ${
-        full ? styles.btnFull : ""
-      }`}
+      className={`${styles.btn} ${styles[variant]} ${
+        size ? styles["btn-" + size] : ""
+      } ${full ? styles.btnFull : ""}`}
       onClick={clickHandler}
       {...props}
     >

@@ -27,8 +27,11 @@ const TodoBlock: FunctionComponent<TodoBlockProps> = ({ todoCard }) => {
         <TodoList todos={todoCard.todos} todoCardId={todoCard.id} />
         {isSaved ? (
           <div className={styles.overlay}>
-            <Button clickHandler={onSaveHandler}>Edit</Button>
+            <Button variant="secondary" clickHandler={onSaveHandler}>
+              Edit
+            </Button>
             <Button
+              variant="secondary"
               clickHandler={() =>
                 dispatch({
                   type: "deleteTodoCard",
@@ -40,7 +43,7 @@ const TodoBlock: FunctionComponent<TodoBlockProps> = ({ todoCard }) => {
             </Button>
           </div>
         ) : (
-          <Button full clickHandler={onSaveHandler}>
+          <Button variant="secondary" full clickHandler={onSaveHandler}>
             Save
           </Button>
         )}

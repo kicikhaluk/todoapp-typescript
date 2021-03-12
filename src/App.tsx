@@ -1,19 +1,15 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { TodoContextProvider } from "./contexts/TodoContext";
-import Layout from "./components/Layout/Layout";
-import HomePage from "./screens/HomePage";
+import { lazy, Suspense } from "react";
+import { useAuth } from "./contexts/AuthContext";
+
+const AuthApp = lazy(() => import("./AuthApp"));
+const UnauthApp = lazy(() => import("./UnauthApp"));
 
 function App() {
+  const { name } = useAuth();
   return (
-    <Router>
-      <TodoContextProvider>
-        <Layout>
-          <Switch>
-            <Route component={HomePage} path="/" />
-          </Switch>
-        </Layout>
-      </TodoContextProvider>
-    </Router>
+    <Suspense fallback={<h1>Loading...</h1>}>
+      {name ? <AuthApp /> : <UnauthApp />}
+    </Suspense>
   );
 }
 

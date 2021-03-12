@@ -74,7 +74,7 @@ const Form: FunctionComponent<FormProps> = ({ isSaved, todoCard }) => {
         />
 
         {!isSaved ? (
-          <Button onClick={addTodoHandler} size="sm">
+          <Button variant="secondary" onClick={addTodoHandler} size="sm">
             Add
           </Button>
         ) : null}
