@@ -1,4 +1,5 @@
 import { createContext, FunctionComponent, useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 type User = {
   name: string | undefined;
@@ -16,6 +17,7 @@ const getUsername = () => {
 const AuthContext = createContext<User | undefined>(undefined);
 
 const AuthContextProvider: FunctionComponent = ({ children }) => {
+  const history = useHistory();
   const [username, setUsername] = useState<string | undefined>(getUsername());
 
   const saveUsername = (username: string) => {
@@ -26,6 +28,8 @@ const AuthContextProvider: FunctionComponent = ({ children }) => {
   const logout = () => {
     localStorage.clear();
     setUsername(undefined);
+    console.log("sa");
+    history.push("/");
   };
 
   const value = {
