@@ -28,7 +28,6 @@ const AuthContextProvider: FunctionComponent = ({ children }) => {
   const logout = () => {
     localStorage.clear();
     setUsername(undefined);
-    console.log("sa");
     history.push("/");
   };
 
