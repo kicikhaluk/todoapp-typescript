@@ -1,5 +1,5 @@
-import { Todo, TodoItem } from "../../types";
-import { TodoState } from "../context/TodoContext";
+import { Todo, TodoItem } from "../types";
+import { TodoState } from "../contexts/TodoContext";
 
 export const titleHandler = (
   title: string,

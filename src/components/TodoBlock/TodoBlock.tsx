@@ -1,7 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import { Todo } from "../../types";
 import Card from "../Card/Card";
-import { useTodoContext } from "../context/TodoContext";
+import { useTodoContext } from "../../contexts/TodoContext";
 import Form from "../Form/Form";
 import TodoList from "../Todo/TodoList";
 import Button from "../UI/Button/Button";

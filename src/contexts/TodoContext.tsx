@@ -4,7 +4,7 @@ import {
   useContext,
   useReducer,
 } from "react";
-import { Todo, TodoItem } from "../../types";
+import { Todo, TodoItem } from "../types";
 import {
   addNewTodo,
   categoryHandler,

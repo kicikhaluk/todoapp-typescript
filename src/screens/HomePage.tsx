@@ -4,7 +4,7 @@ import TodoBlock from "../components/TodoBlock/TodoBlock";
 import Button from "../components/UI/Button/Button";
 import Column from "../components/UI/Column/Column";
 import Row from "../components/UI/Row/Row";
-import { useTodoContext } from "../components/context/TodoContext";
+import { useTodoContext } from "../contexts/TodoContext";
 const HomePage = () => {
   const {
     state: { todoCards },

@@ -1,6 +1,6 @@
 import { ChangeEvent, FunctionComponent, useState } from "react";
 import styles from "./TodoItem.module.css";
-import { useTodoContext } from "../../context/TodoContext";
+import { useTodoContext } from "../../../contexts/TodoContext";
 import { TodoItem as TodoItemTypes } from "../../../types";
 
 export interface TodoItemProps {

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { TodoContextProvider } from "./components/context/TodoContext";
+import { TodoContextProvider } from "./contexts/TodoContext";
 import Layout from "./components/Layout/Layout";
 import HomePage from "./screens/HomePage";
 

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import NavigationItem from "./NavigationItem/NavigationItem";
 import UserProfile from "./UserProfile/UserProfile";
-import { useTodoContext } from "../context/TodoContext";
+import { useTodoContext } from "../../contexts/TodoContext";
 
 const Navigation = () => {
   const {

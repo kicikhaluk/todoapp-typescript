@@ -1,6 +1,6 @@
 import { ChangeEvent, FunctionComponent, MouseEvent, useState } from "react";
 import { Todo } from "../../types";
-import { useTodoContext } from "../context/TodoContext";
+import { useTodoContext } from "../../contexts/TodoContext";
 import Button from "../UI/Button/Button";
 import styles from "./Form.module.css";
 
